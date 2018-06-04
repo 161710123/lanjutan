@@ -11,6 +11,6 @@ class eskul extends Model
 
          public function prestasi()
     {
-    	return $this->belongsTo('App\prestasi','id_eskul');
+    	return $this->hasMany('App\prestasi','id_eskul');
     }
 }

@@ -11,7 +11,7 @@ class industri extends Model
 
          public function jurusan()
     {
-    	return $this->belongsTo('App\jurusan','id_industri');
+    	return $this->hasMany('App\jurusan','id_industri');
     }
 
 }

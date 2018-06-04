@@ -14,7 +14,8 @@ class EskulController extends Controller
      */
     public function index()
     {
-        //
+        $a = eskul::all();
+        return view('eskul.index',compact('a'));
     }
 
     /**
@@ -24,7 +25,7 @@ class EskulController extends Controller
      */
     public function create()
     {
-        //
+         return view('eskul.create');
     }
 
     /**
@@ -35,7 +36,16 @@ class EskulController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    	  $this->validate($request,[
+            'nama' => 'required|max:255',
+            'keterangan' => 'required|max:255',
+        ]);
+
+        $a = new eskul;
+        $a->nama = $request->nama;
+        $a->keterangan = $request->keterangan;
+        $a->save();
+        return redirect()->route('eskuls.index');
     }
 
     /**
@@ -44,9 +54,10 @@ class EskulController extends Controller
      * @param  \App\mapel_siswa  $mapel_siswa
      * @return \Illuminate\Http\Response
      */
-    public function show(eskul $eskul)
+    public function show($id)
     {
-        //
+        $a = eskul::findOrFail($id);
+        return view('eskul.show',compact('a'));
     }
 
     /**
@@ -55,9 +66,10 @@ class EskulController extends Controller
      * @param  \App\mapel_siswa  $mapel_siswa
      * @return \Illuminate\Http\Response
      */
-    public function edit(eskul $eskul)
+    public function edit($id)
     {
-        //
+         $a = eskul::findOrFail($id);
+        return view('eskul.edit',compact('a'));
     }
 
     /**
@@ -67,9 +79,19 @@ class EskulController extends Controller
      * @param  \App\mapel_siswa  $mapel_siswa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, eskul $eskul)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'nama' => 'required|max:255',
+            'keterangan' => 'required|max:255',
+        ]);
+
+        // update data berdasarkan id
+        $a = eskul::findOrFail($id);
+        $a->nama = $request->nama;
+        $a->keterangan = $request->keterangan;
+        $a->save();
+        return redirect()->route('eskuls.index');
     }
 
     /**
@@ -78,8 +100,10 @@ class EskulController extends Controller
      * @param  \App\mapel_siswa  $mapel_siswa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(eskul $eskul)
+    public function destroy($id)
     {
-        //
+           $a = eskul::findOrFail($id);
+        $a->delete();
+        return redirect()->route('eskuls.index');  
     }
 }
