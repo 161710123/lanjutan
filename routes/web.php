@@ -17,6 +17,7 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('eskuls','EskulController');
+Route::resource('prestasis','PrestasiController');
 
 Auth::routes();
 

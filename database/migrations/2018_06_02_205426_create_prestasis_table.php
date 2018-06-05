@@ -19,8 +19,6 @@ class CreatePrestasisTable extends Migration
             $table->string('keterangan');
             $table->UnsignedInteger('id_eskul');
             $table->foreign('id_eskul')->references('id')->on('eskuls')->onDelete('CASCADE');
-            $table->UnsignedInteger('id_jurusan');
-            $table->foreign('id_jurusan')->references('id')->on('jurusans')->onDelete('CASCADE');
             $table->timestamps();
         });
     }

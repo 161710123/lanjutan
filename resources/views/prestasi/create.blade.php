@@ -7,12 +7,12 @@
 	<div class="container">
 		<div class="col-md-12">
 			<div class="panel panel-primary">
-			  <div class="panel-heading"> eskul
+			  <div class="panel-heading"> prestasi
 			  	<div class="panel-title pull-right"><a href="{{ url()->previous() }}">Kembali</a>
 			  	</div>
 			  </div>
 			  <div class="panel-body">
-			  	<form action="{{ route('eskuls.store') }}" method="post" >
+			  	<form action="{{ route('prestasis.store') }}" method="post" >
 			  		{{ csrf_field() }}
 			  		
 			  		<div class="form-group {{ $errors->has('nama') ? ' has-error' : '' }}">
@@ -34,8 +34,19 @@
                             </span>
                         @endif
 			  		</div>
-
-			  		
+			  		<div class="form-group {{ $errors->has('id_eskul') ? ' has-error' : '' }}">
+			  			<label class="control-label">eskul</label>	
+			  			<select name="id_eskul" class="form-control">
+			  				@foreach($eskul as $data)
+			  				<option value="{{ $data->id }}">{{ $data->nama }}</option>
+			  				@endforeach
+			  			</select>
+			  			@if ($errors->has('id_eskul'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('id_eskul') }}</strong>
+                            </span>
+                        @endif
+			  		</div>
 			  		<div class="form-group">
 			  			<button type="submit" class="btn btn-primary">Tambah</button>
 			  		</div>
